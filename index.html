@@ -19,6 +19,11 @@
          touch-action:auto;-ms-touch-action:auto;
          pointer-events:auto;-webkit-overflow-scrolling:touch;"
   allow="geolocation; microphone; camera; accelerometer; gyroscope; autoplay"
-></iframe>
+>
+  window.addEventListener('touchstart', e => {
+  console.log('touchstart', e);
+  document.body.style.background = 'pink';
+});
+</iframe>
 </body>
 </html>
