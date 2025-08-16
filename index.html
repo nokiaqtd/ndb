@@ -5,28 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Quick NDB</title>
   <script>
-    // Insert SVG-only favicon. No fallback provided.
+    // SVG-only favicon: white "N" on hsl(219 100% 50%) background
     (function(){
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 13" width="90" height="40" fill="none">
-        <g clip-path="url(#clip0_1370_711152)">
-          <path d="M38.0192 0.395349V12.6046H39.842V0.395349H38.0192ZM18.5454 0.186787C14.9944 0.186771 12.2392 2.78308 12.2392 6.5C12.2392 10.3843 14.9944 12.8133 18.5454 12.8132C22.0964 12.8132 24.8572 10.3843 24.8516 6.5C24.8464 2.97836 22.0964 0.186803 18.5454 0.186787ZM23.0321 6.5C23.0321 9.25164 21.0233 11.0752 18.5454 11.0752C16.0674 11.0752 14.0587 9.25164 14.0587 6.5C14.0587 3.79827 16.0674 1.92486 18.5454 1.92486C21.0233 1.92486 23.0321 3.79827 23.0321 6.5ZM0 1.10175e-06V12.6046H1.86027V4.27476L11.5273 13V10.3867L0 1.10175e-06ZM26.2225 6.5L32.9874 12.6047H35.6999L28.9248 6.5L35.6999 0.395343H32.9874L26.2225 6.5ZM55 12.6046H52.9948L51.5285 9.90093H44.8871L43.4206 12.6046H41.4153L43.8437 8.09822H50.5748L47.2185 1.83556L48.2078 0L55 12.6046Z" fill="white"></path>
-        </g>
-        <defs><clipPath id="clip0_1370_711152"><rect width="73" height="12.361" fill="white"/></clipPath></defs>
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="N">
+        <rect width="100%" height="100%" fill="hsl(219 100% 50%)"/>
+        <!-- left vertical bar -->
+        <rect x="8" y="8" width="10" height="48" fill="#fff"/>
+        <!-- diagonal stroke (slanted middle) -->
+        <polygon points="18,8 30,8 46,56 34,56" fill="#fff"/>
+        <!-- right vertical bar -->
+        <rect x="46" y="8" width="10" height="48" fill="#fff"/>
       </svg>`;
 
-      const svgBase64 = btoa(unescape(encodeURIComponent(svg)));
-      const url = 'data:image/svg+xml;base64,' + svgBase64;
-
-      // remove existing favicon links to avoid duplicates
+      const url = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
       document.querySelectorAll('link[rel~="icon"]').forEach(n => n.remove());
-
       const link = document.createElement('link');
       link.rel = 'icon';
       link.type = 'image/svg+xml';
       link.href = url;
       document.head.appendChild(link);
     })();
-  </script>  
+  </script>
   <style>
     html, body { margin: 0; height: 100%; }
     iframe { border: none; width: 100%; height: 100%; touch-action: auto; -ms-touch-action: auto; pointer-events: auto; -webkit-overflow-scrolling: touch; }
