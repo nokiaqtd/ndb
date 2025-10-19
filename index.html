@@ -59,5 +59,31 @@
       document.title = 'Quick NDB';
     })();
   </script>
+
+  <script>
+    // allow only the trusted iframe origin(s)
+    const TRUSTED_IFRAME_ORIGINS = [
+      'https://script.google.com'
+      // add other origins if you host the iframe elsewhere
+    ];
+  
+    window.addEventListener('message', async (ev) => {
+      // validate origin
+      if (!TRUSTED_IFRAME_ORIGINS.some(o => ev.origin.startsWith(o))) return;
+      const msg = ev.data || {};
+      if (msg && msg.type === 'ndb-copy') {
+        try {
+          // do the clipboard write in the top-level context (must be secure context)
+          await navigator.clipboard.writeText(msg.text || '');
+          // reply success
+          ev.source.postMessage({ type: 'ndb-copy-result', ok: true, id: msg.id || null }, ev.origin);
+        } catch (err) {
+          // reply failure
+          ev.source.postMessage({ type: 'ndb-copy-result', ok: false, err: String(err), id: msg.id || null }, ev.origin);
+        }
+      }
+    }, false);
+  </script>
+  
 </body>
 </html>
